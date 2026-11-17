@@ -26,6 +26,7 @@ class ProcessManagerApp:
         self.update_processes()
 
     def create_widgets(self):
+
         # Main heading
         heading = tk.Label(
             self.root,
@@ -217,6 +218,7 @@ class ProcessManagerApp:
         self.status_label.pack(side="right")
 
     def update_processes(self):
+
         self.all_processes = self.monitor.get_processes()
 
         # Save monitoring history
@@ -247,10 +249,11 @@ class ProcessManagerApp:
         )
 
     def display_processes(self):
+
         for item in self.tree.get_children():
             self.tree.delete(item)
 
-        search_text = self.search_var.get().lower()
+        search_text = self.search_var.get().strip().lower()
         selected_type = self.type_filter.get()
 
         for process in self.all_processes:
@@ -260,11 +263,20 @@ class ProcessManagerApp:
                 if process["type"] != selected_type:
                     continue
 
-            # Apply search filter
+            # Search PID, name, type and classification
             if search_text:
-                if search_text not in process["name"].lower():
+
+                searchable_text = (
+                    str(process["pid"]) + " " +
+                    str(process["name"]) + " " +
+                    str(process["type"]) + " " +
+                    str(process["classification"])
+                ).lower()
+
+                if search_text not in searchable_text:
                     continue
 
+            # Display matching process
             self.tree.insert(
                 "",
                 "end",
@@ -281,6 +293,7 @@ class ProcessManagerApp:
             )
 
     def update_summary(self):
+
         cpu = psutil.cpu_percent(interval=None)
         memory = psutil.virtual_memory().percent
 
@@ -297,6 +310,7 @@ class ProcessManagerApp:
         )
 
     def update_charts(self):
+
         # Exclude Windows idle process from charts
         valid_processes = [
             process
@@ -364,6 +378,7 @@ class ProcessManagerApp:
         self.canvas.draw()
 
     def sort_table(self, column):
+
         items = [
             (
                 self.tree.set(item, column),
@@ -391,6 +406,7 @@ class ProcessManagerApp:
 
 
 if __name__ == "__main__":
+
     root = tk.Tk()
     app = ProcessManagerApp(root)
     root.mainloop()
