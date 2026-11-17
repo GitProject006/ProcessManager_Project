@@ -86,3 +86,5 @@ SQLite is used to maintain process history, including timestamps, process IDs, p
 ## Conclusion
 
 The Process Manager provides an effective way to monitor running processes, analyze resource utilization, classify processes, and maintain process history using a graphical interface and SQLite database.
+<img width="953" height="556" alt="dashboard" src="https://github.com/user-attachments/assets/b6cd4256-a872-490a-b1a9-946bc616eaba" />
+
