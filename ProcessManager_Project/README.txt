@@ -15,6 +15,7 @@ How to Run:
 2. Open the extracted folder.
 3. Double-click Run_Process_Manager.bat.
 4. Wait for dependencies to install and the dashboard to open.
+Run main.py for the output to open in new window 
 
 Features:
 - Process monitoring
